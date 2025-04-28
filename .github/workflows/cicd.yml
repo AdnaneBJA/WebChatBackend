@@ -26,20 +26,42 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: [aws-ec2]
+    runs-on: [ aws-ec2 ]
     steps:
+      - name: Print Working Directory
+        run: pwd
+
+      - name: List Files in Home
+        run: ls -l ~
+
+      - name: List Files in actions-runner
+        run: ls -l ~/actions-runner
+
+      - name: Print User
+        run: whoami
+
+      - name: Print Environment Variables
+        run: env
+
       - name: Check Docker Installation
         run: |
           if ! [ -x "$(command -v docker)" ]; then
             echo "Error: Docker is not installed." >&2
             exit 1
           fi
+
+      - name: Docker Version
+        run: docker --version
+
       - name: Pull image from Docker Hub
         run: docker pull thebester14/webchatbackend:latest
+
       - name: Delete existing container
         run: |
           if [ "$(docker ps -aq -f name=demo)" ]; then
             docker rm -f demo
           fi
+
       - name: Run Docker container
         run: docker run -d -p 8080:8080 --name demo thebester14/webchatbackend:latest
+
