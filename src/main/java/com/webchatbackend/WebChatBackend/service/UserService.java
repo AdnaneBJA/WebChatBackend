@@ -30,13 +30,17 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public String verify(Users user) {
+    public int verify(Users user) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(user.getUsername());
+            return userRepo.getCurrentUserId(user.getUsername());
         }
 
-        return "You are not connected";
+        return -1;
+    }
+
+    public int retrieveID(String username) {
+        return userRepo.getCurrentUserId(username);
     }
 }

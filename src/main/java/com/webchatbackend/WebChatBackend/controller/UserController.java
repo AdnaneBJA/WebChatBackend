@@ -28,7 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Users user) {
+    public int login(@RequestBody Users user) {
+        System.out.println("ID: " + userService.retrieveID(user.getUsername()));
         return userService.verify(user);
     }
 
