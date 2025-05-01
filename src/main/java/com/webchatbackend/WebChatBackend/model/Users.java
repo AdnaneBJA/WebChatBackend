@@ -14,6 +14,7 @@ public class Users {
     private String email;
     private String username;
     private String password;
+    private byte[] profilePicture;
 
     public int getID() {
         return ID;
@@ -45,6 +46,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     @Override

@@ -7,7 +7,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -30,17 +32,22 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public int verify(Users user) {
+    public String verify(Users user) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
         if (authentication.isAuthenticated()) {
-            return userRepo.getCurrentUserId(user.getUsername());
+            return jwtService.generateToken(user.getUsername());
         }
 
-        return -1;
+        return "User is not connected";
     }
 
     public int retrieveID(String username) {
         return userRepo.getCurrentUserId(username);
+    }
+
+
+    public Users getUserById(int id) {
+        return userRepo.findById(id).orElse(null);
     }
 }

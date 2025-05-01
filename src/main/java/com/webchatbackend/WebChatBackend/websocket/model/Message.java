@@ -1,20 +1,24 @@
 package com.webchatbackend.WebChatBackend.websocket.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Message {
     private String message;
     private int senderID;
     private String time;
+    private String username;
+    private byte[] profilePicture;
 
     public Message() {
 
     }
 
-    public Message(String message, int senderID, String time) {
+    public Message(String message, int senderID, String time, String username) {
         this.message = message;
         this.senderID = senderID;
         this.time = time;
+        this.username = username;
     }
 
     public String getMessage() {
@@ -41,12 +45,21 @@ public class Message {
         this.time = time;
     }
 
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
                 "message='" + message + '\'' +
                 ", senderID=" + senderID +
-                ", time=" + time +
-                '}';
+                ", time='" + time + '\'' +
+                ", username='" + username + '\'' ;
     }
 }
