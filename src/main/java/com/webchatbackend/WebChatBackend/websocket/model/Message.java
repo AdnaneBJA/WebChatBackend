@@ -8,17 +8,18 @@ public class Message {
     private int senderID;
     private String time;
     private String username;
-    private byte[] profilePicture;
+    private String imageURL;
 
     public Message() {
 
     }
 
-    public Message(String message, int senderID, String time, String username) {
+    public Message(String message, int senderID, String time, String username, String imageURL) {
         this.message = message;
         this.senderID = senderID;
         this.time = time;
         this.username = username;
+        this.imageURL = imageURL;
     }
 
     public String getMessage() {
@@ -54,12 +55,22 @@ public class Message {
         this.username = username;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
                 "message='" + message + '\'' +
                 ", senderID=" + senderID +
                 ", time='" + time + '\'' +
-                ", username='" + username + '\'' ;
+                ", username='" + username + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
     }
 }
